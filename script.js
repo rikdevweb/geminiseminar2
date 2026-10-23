@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const emailError = document.getElementById('emailError');
 
     // Pastikan URL Deployment Apps Script Anda sudah benar
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyS_5Umzm0bXAnNaEGDad9hA0gFJtgA5rrFcHUKhP9p_m9AZfm-B2AGiEgG_6XBijYA/exec'; 
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzaWpeWY7lgqjXAkX0pBDxzXQlSM_UdccS-YVSAun4o4GJvRCoVkkkcz1A14s3LOZMt/exec'; 
 
     // Reset error merah saat user mengetik ulang
     if (emailInput) {
@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const formData = new FormData(form);
 
-        fetch(SCRIPT_URL, { 
+            fetch(SCRIPT_URL, { 
                 method: 'POST', 
                 body: formData
             })
@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     kuotaAlert.style.borderColor = 'rgba(234, 67, 53, 0.3)';
                     kuotaAlert.style.display = 'block'; // Tampilkan alert
                     
-                    submitBtn.disabled = true; // Matikan tombol agar tidak bisa diklik lagi
+                    submitBtn.disabled = true; // Matikan tombol
                     spinner.style.display = 'none';
                     btnText.innerText = 'Pendaftaran Ditutup';
 
@@ -139,6 +139,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 spinner.style.display = 'none';
                 btnText.innerText = 'Daftar Sekarang';
             });
+            
+        }); // <-- INI YANG HILANG (Penutup dari form.addEventListener)
+    } // <-- INI YANG HILANG (Penutup dari if (form))
 
     // 4. PENUTUPAN MODAL SETELAH KLIK JOIN WA
     const joinGroupBtn = document.getElementById('joinGroupBtn');
