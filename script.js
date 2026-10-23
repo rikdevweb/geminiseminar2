@@ -88,13 +88,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const formData = new FormData(form);
 
-            fetch(SCRIPT_URL, { 
+        fetch(SCRIPT_URL, { 
                 method: 'POST', 
                 body: formData
             })
             .then(response => response.json())
             .then(data => {
                 if (data.result === 'success') {
+                    // Pendaftaran Berhasil
                     modal.classList.add('active');
                     form.reset();
                     
@@ -103,13 +104,31 @@ document.addEventListener("DOMContentLoaded", () => {
                     btnText.innerText = 'Daftar Sekarang';
 
                 } else if (data.result === 'full') {
+                    // Kuota Penuh
                     kuotaAlert.innerHTML = '<span class="material-symbols-rounded">sentiment_dissatisfied</span> Maaf, Kuota Sudah Terpenuhi!';
                     kuotaAlert.style.backgroundColor = 'rgba(234, 67, 53, 0.15)'; 
                     kuotaAlert.style.color = 'var(--g-red)';
                     kuotaAlert.style.borderColor = 'rgba(234, 67, 53, 0.3)';
+                    kuotaAlert.style.display = 'block'; // Tampilkan alert
                     
+                    submitBtn.disabled = true; // Matikan tombol agar tidak bisa diklik lagi
                     spinner.style.display = 'none';
                     btnText.innerText = 'Pendaftaran Ditutup';
+
+                } else if (data.result === 'duplicate') {
+                    // Mencegah Pendaftaran Ganda (Email sudah terdaftar)
+                    emailGroup.classList.add('invalid');
+                    emailError.style.display = 'block';
+                    emailError.innerText = "Email ini sudah terdaftar! Gunakan email lain.";
+                    
+                    // Efek getar (shake)
+                    emailGroup.style.transform = "translateX(-5px)";
+                    setTimeout(() => emailGroup.style.transform = "translateX(5px)", 100);
+                    setTimeout(() => emailGroup.style.transform = "translateX(0)", 200);
+
+                    submitBtn.disabled = false;
+                    spinner.style.display = 'none';
+                    btnText.innerText = 'Daftar Sekarang';
                 }
             })
             .catch(error => {
@@ -120,8 +139,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 spinner.style.display = 'none';
                 btnText.innerText = 'Daftar Sekarang';
             });
-        });
-    }
 
     // 4. PENUTUPAN MODAL SETELAH KLIK JOIN WA
     const joinGroupBtn = document.getElementById('joinGroupBtn');
