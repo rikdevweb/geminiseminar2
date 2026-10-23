@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const emailError = document.getElementById('emailError');
 
     // Pastikan URL Deployment Apps Script Anda sudah benar
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwQtrjcqBGXBj8tvK32JETF7Ne48wc_vAbGb9hv9shn7_ptJD_p5OmwL5KAeOxeSSVb/exec'; 
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwLg7KJc3Re6n5400GvHkIVJT649C64ey6SNI_g59B-XWXmcYZ2WiPmCBjGR1yXiDaS/exec'; 
 
     // Reset error merah saat user mengetik ulang
     if (emailInput) {
